@@ -18,10 +18,13 @@ public class SchedulerCommandService {
     @Scheduled(cron = "${service.commands.cron}")
     public void scheduleTaskWithCronExpression() {
         System.out.println("EXEC COMMANDS");
-        Stream.of(settingsService.getActiveParams().stream()
-                .peek(System.out::println)
-                .map(params -> conditionService.evaluateCommandOnEvent(EventType.valueOf(params.getParam()))))
-                .flatMap(Function.identity())
+        Stream.of(
+                settingsService.getActiveParams().stream()
+                        .peek(System.out::println)
+                        .map(params ->
+                                conditionService.evaluateCommandOnEvent(EventType.valueOf(params.getParam()))
+                        )
+        ).flatMap(Function.identity())
 //                .peek(System.out::println)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
