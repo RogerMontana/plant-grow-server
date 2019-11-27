@@ -3,8 +3,11 @@ version: '3.5'
 volumes:
   cassandra_data:
 
-services:
+networks:
+  backend:
+    driver: bridge
 
+services:
   cassandra:
     image: cassandra:latest
     container_name: cassandra
@@ -16,13 +19,27 @@ services:
     restart: always
     volumes:
       - cassandra_data:/var/lib/cassandra:rw
+    networks:
+      - backend
 
   cassandra-load-keyspace:
     container_name: cassandra-load-keyspace
     image: cassandra:latest
     depends_on:
       - cassandra
+    networks:
+      - backend
     volumes:
       - ./src/main/resources/cassandra_schema.cql:/schema.cql
     command: /bin/bash -c "sleep 60 && echo loading cassandra keyspace && cqlsh cassandra -f /schema.cql"
 
+  grow:
+    image: plant-grow:latest
+    container_name: plant-grow
+    ports:
+      - "8080:8080"
+    depends_on:
+      - cassandra
+    networks:
+      - backend
+    restart: on-failure
