@@ -2,6 +2,7 @@ package com.rasp.server.configuration;
 
 import com.rasp.server.repo.CommandLogRepository;
 import com.rasp.server.repo.ConditionSettingsRepository;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import com.rasp.server.repo.EventLogRepository;
 import com.rasp.server.service.*;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,8 +37,8 @@ public class Context {
     }
 
     @Bean
-    ServoCommandExecutor servoCommandExecutor(CommandLogRepository commandLogRepository) {
-        return new ServoCommandExecutor(commandLogRepository);
+    ServoCommandExecutor servoCommandExecutor(CommandLogRepository commandLogRepository, SimpMessagingTemplate template) {
+        return new ServoCommandExecutor(commandLogRepository, template);
     }
 
     @Bean
