@@ -15,10 +15,10 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 public class AdminController {
-    private final EventLogRepository eventLogRepository;
-    private final CommandLogRepository commandLogRepository;
-    private final ConditionSettingsRepository conditionSettingsRepository;
-    private final SchedulerCommandService schedulerCommandService;
+    private EventLogRepository eventLogRepository;
+    private CommandLogRepository commandLogRepository;
+    private ConditionSettingsRepository conditionSettingsRepository;
+    private SchedulerCommandService schedulerCommandService;
     
     @DeleteMapping("/admin/events/clean")
     public void cleanEvents() {

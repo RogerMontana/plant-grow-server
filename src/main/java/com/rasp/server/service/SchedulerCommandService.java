@@ -10,10 +10,10 @@ import java.util.stream.Stream;
 
 @AllArgsConstructor
 public class SchedulerCommandService {
-    private final OptimalConditionService conditionService;
-    private final ConditionSettingsService settingsService;
-    private final ServoCommandExecutor commandExecutor;
-    private final String cron;
+    private OptimalConditionService conditionService;
+    private ConditionSettingsService settingsService;
+    private ServoCommandExecutor commandExecutor;
+    private String cron;
 
     @Scheduled(cron = "${service.commands.cron}")
     public void scheduleTaskWithCronExpression() {
