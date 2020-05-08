@@ -2,8 +2,6 @@ package com.rasp.server.api;
 
 import com.rasp.server.constant.EventType;
 import com.rasp.server.constant.UnitType;
-import com.rasp.server.dto.Greeting;
-import com.rasp.server.dto.HelloMessage;
 import com.rasp.server.dto.ParamInfoDto;
 import com.rasp.server.dto.ParamRequest;
 import com.rasp.server.repo.tables.Records;
@@ -12,9 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.util.HtmlUtils;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
 @RequiredArgsConstructor

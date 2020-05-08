@@ -22,12 +22,10 @@ public class EventLogService {
 
     //LIKE SLIDING WINDOW BY TIME ALG
     public Records getCurrentRecords(EventType eventType) {
-        Records records = eventLogRepository.findAll()
+        return eventLogRepository.findAll()
                 .filter(r -> r.getParam().contains(eventType.toString()) && r.getTimestamp() > (Date.from(Instant.now().minusSeconds(timeWindow)).getTime()))
                 .toStream().max((Comparator.comparing(Records::getTimestamp)))
                 .orElseThrow(() -> new NoSuchElementException(String.format("No data for %s in %d sec window", eventType, timeWindow)));
-        System.out.println(records);
-        return records;
     }
 
 }
